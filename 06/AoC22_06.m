@@ -1,5 +1,5 @@
 clear
-input = fileread('06\input.txt')
+input = fileread('input.txt')
 
 %%
 checkPacketIndex = checkIndex(input,4)
