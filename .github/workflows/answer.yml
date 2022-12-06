@@ -12,4 +12,4 @@ jobs:
       - name: Run commands
         uses: matlab-actions/run-command@v1
         with:
-          command: addpath(genpath('../AoC2022/')), eval(['AoC22_' char(datetime("today","Format","dd"))])
+          command: addpath(genpath('../AoC2022/')), eval(char(datetime("today","Format","dd"))), eval(['AoC22_' char(datetime("today","Format","dd"))])
