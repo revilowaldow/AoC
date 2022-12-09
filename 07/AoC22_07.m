@@ -33,13 +33,12 @@ for i = 1:height(input)
         case "dir"
             %noop
         otherwise
-            fileSize = double(input{i,1});
+            fileSizes(i) = double(input{i,1});
             if any(dirSizes.paths == currentPath)
-                dirSizes{dirSizes.paths == currentPath,2} = dirSizes{dirSizes.paths == currentPath,2}+fileSize;
+                dirSizes{dirSizes.paths == currentPath,2} = dirSizes{dirSizes.paths == currentPath,2}+fileSizes(i);
             else
-                dirSizes(height(dirSizes)+1,:) = table(currentPath,fileSize);
+                dirSizes(height(dirSizes)+1,:) = table(currentPath,fileSizes(i));
             end
-            fileSizes(i) = fileSize;
     end
 end
 dirSizes.depth = count(string(dirSizes.paths),"/");
@@ -53,5 +52,4 @@ smallDirs = sum(table2array(dirSizes(dirSizes.sizes<=100000,2)))
 
 %%
 
-toRemove = 30000000-(70000000-sum(fileSizes));
-removedSize = min(dirSizes.sizes(dirSizes.sizes>=toRemove))
+removedSize = min(dirSizes.sizes(dirSizes.sizes>=(30000000-(70000000-sum(fileSizes)))))

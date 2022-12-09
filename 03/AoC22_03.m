@@ -1,6 +1,8 @@
 clear
 input = readlines("input.txt");
 
+%%
+
 nRucksacks=length(input);
 splitInput= strings(nRucksacks,2);
 common=blanks(nRucksacks);
@@ -17,6 +19,8 @@ for i=1:nRucksacks
     end
 end
 PrioritySum=sum(Priorities)
+
+%%
 
 GroupType=blanks(nRucksacks/3);
 for i=1:nRucksacks/3

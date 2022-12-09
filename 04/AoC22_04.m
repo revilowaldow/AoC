@@ -5,13 +5,16 @@ opts.VariableTypes = ["double", "double", "double", "double"];
 input = readtable("input.txt", opts);
 input = table2array(input);
 
-nPairs=length(input);
+%%
 
+nPairs=length(input);
 contained=false([nPairs 1]);
 for i= 1:nPairs
     contained(i)= ((input(i,1)<=input(i,3))&(input(i,4)<=input(i,2)))|((input(i,3)<=input(i,1))&(input(i,2)<=input(i,4)));
 end
 nContained = sum(contained)
+
+%%
 
 ranges=cell([nPairs 4]);
 for j = 1:nPairs
