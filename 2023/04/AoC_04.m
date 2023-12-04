@@ -19,8 +19,8 @@ Ans1 = sum(count(count~=0.5))
 
 copies = ones([length(winners) 1]);
 for i = 1:length(ours)
+    wins = sum(ismember(winners(i,:),ours(i,:)));
     for c = 1:copies(i)
-        wins = sum(ismember(winners(i,:),ours(i,:)));
         copies(i+1:i+wins,:)=copies(i+1:i+wins,:)+1;
     end
 end
