@@ -2,7 +2,7 @@ clear
 opts = delimitedTextImportOptions("NumVariables", 21);
 opts.Delimiter = " ";
 opts.VariableTypes = ["string", repelem("double",20)];
-opts.SelectedVariableNames = [2:21];
+opts.SelectedVariableNames = 2:21;
 opts.DataLines = [1, 1];
 seeds = table2array(readtable('05_input.txt',opts))'
 
@@ -34,18 +34,43 @@ Ans1 = min(locations)
 %%
 
 seeds = sortrows(reshape(seeds,2,[])')
+locations = zeros([length(seeds) 1]);
 fullseeds = [];
 for i = 1:length(seeds)
-%fullseeds = [fullseeds; seeds(i,1):seeds(i,1)+seeds(i,2)-1];
+    fullseeds = [];
+    %fullseeds = [fullseeds; (seeds(i,1):seeds(i,1)+seeds(i,2)-1)'];
+    fullseeds = (seeds(i,1):seeds(i,1)+seeds(i,2)-1)';
+    disp(i)
+    %{
+    for j = 1:length(fullseeds)
+        temp = mapSeed2location(fullseeds(j),maps);
+        smallestloc = inf;
+        if temp<smallestloc
+            smallestloc = temp;
+        end
+    end
+    locations(i)=smallestloc;
+    %}
+    tic
+    locations(i) = min(mapSeed2location(fullseeds,maps));
+    toc
 end
-%{
-parfor i = 1:length(fullseeds)
-locationsFull(i) = mapSeed2location(fullseeds(i),maps);
 
+Ans2 = min(locations)
+
+
+%{
+smallestloc = inf;
+for i = 1:length(fullseeds)
+    temp = mapSeed2location(fullseeds(i),maps);
+    if temp<smallestloc
+        smallestloc = temp;
+    end
 end
 %}
 
-Ans2 = min(locationsFull)
+%min(mapSeed2location(fullseeds,maps))
+%Ans2 = smallestloc
 
 
 %%
@@ -80,7 +105,7 @@ function out = followMap(map,in)
 
 out = in;
 for i = 1:length(map)
-    if map(i,2)<in && in<map(i,2)+map(i,3)-1
+    if map(i,2)<=in & in<map(i,2)+map(i,3)-1
         out = map(i,1)+in-map(i,2);
     end
 end
