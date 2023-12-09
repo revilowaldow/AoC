@@ -1,6 +1,5 @@
 clear
-opts = detectImportOptions("09_input.txt");
-input = readmatrix("09_input.txt",opts)
+input = readmatrix("09_input.txt")
 
 %%
 predictions = zeros([length(input) 1]);
