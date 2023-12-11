@@ -15,7 +15,6 @@ inputTest = [
     '.......#..';
     '#...#.....'];
 
-
 %%
 
 galDist(inputTest,2) == 374
@@ -71,6 +70,5 @@ for i = 1:length(combs)
 end
 
 dist = sum(pairdist);
-size(input)
-end
 
+end
