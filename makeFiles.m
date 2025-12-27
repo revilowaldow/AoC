@@ -1,6 +1,6 @@
 function makeFiles(y)
 mkdir(y)
-for idx = 1:25
+for idx = 1:12
     mkdir(fullfile(y,sprintf("%02i",idx)))
     fn = fullfile(y,sprintf("%02i",idx),"AoC_" + sprintf("%02i",idx)+".txt");
     writematrix("clear",fn,QuoteStrings=false)
